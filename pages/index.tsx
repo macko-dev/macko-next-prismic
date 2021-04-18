@@ -11,12 +11,13 @@ import { RichText } from 'prismic-reactjs';
 import { client } from '../utils/prismic-configuration';
 import ApiSearchResponse from 'prismic-javascript/types/ApiSearchResponse';
 
-export default function Home({ home, courses, posts }): JSX.Element {
+export default function Home({ home, courses, posts, jobs }): JSX.Element {
   const {
     title_header,
     sub_title_header,
     card_prices,
     footer_list,
+    links,
   } = home.data;
 
   return (
@@ -29,9 +30,9 @@ export default function Home({ home, courses, posts }): JSX.Element {
       <Header title={title_header} subTitle={sub_title_header} />
       <Courses list={courses.results} />
       <Posts list={posts.results} />
-      <Jobs />
+      <Jobs list={jobs.results} />
       <Prices list={card_prices} />
-      <Footer list={footer_list} />
+      <Footer list={footer_list} social={links} />
     </>
   );
 }
@@ -46,6 +47,11 @@ export async function getServerSideProps() {
   const posts = await client.query(
     Prismic.Predicates.at('document.type', 'blog_post'),
     { orderings: '[my.post.date desc]', pageSize: 3 }
+  );
+
+  const jobs = await client.query(
+    Prismic.Predicates.at('document.type', 'jobs_post'),
+    { orderings: '[my.jobs.date desc]', pageSize: 2 }
   );
 
   const mapNumberToMonth = [
@@ -70,5 +76,5 @@ export async function getServerSideProps() {
     } de ${dateArray[0]}`;
   });
 
-  return { props: { home, courses, posts } };
+  return { props: { home, courses, posts, jobs } };
 }

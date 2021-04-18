@@ -39,6 +39,7 @@ body, .article {
   font-size: 1rem;
   line-height: 1.5rem;
 }
+
 h1, .h1 {
   font-size: 4.25rem;
   line-height: 4.5rem;
@@ -96,6 +97,21 @@ sup {
 }
 sub {
   bottom: -0.25em;
+}
+
+label{
+  color: ${(props) => props.theme.color.primary[4]};
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.border-radius-15{
+  border-radius: 15px;
 }
 
 .vertical-line{ 

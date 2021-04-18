@@ -13,7 +13,6 @@ import { RichText } from 'prismic-reactjs';
 
 function CardList({ course, index }): JSX.Element {
   const mapSVG = ['weapon.svg', 'witch-hat.svg', 'coin.svg'];
-  console.log(mapSVG[index]);
   return (
     <Link href="/">
       <Card>
@@ -35,7 +34,7 @@ function CardList({ course, index }): JSX.Element {
 export default function Courses({ list }): JSX.Element {
   const value = 0;
   return (
-    <CardContainer>
+    <CardContainer id="cursos">
       <Container className="py-5">
         <Title>Cursos Disponibilizados</Title>
         <Row className="justify-content-center">

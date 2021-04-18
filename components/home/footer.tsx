@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Button from '../../components/Button';
 import theme from '../../styles/theme';
 
-export default function Footer({ list }): JSX.Element {
+export default function Footer({ list, social }): JSX.Element {
   return (
     <FooterContainer className="d-flex align-content-center flex-wrap">
       <Container>
@@ -20,38 +20,18 @@ export default function Footer({ list }): JSX.Element {
               height={52}
             />
             <ul className="mx-auto mt-4">
-              <li>
-                <Image
-                  src="/assets/twitter.svg"
-                  alt="Logo"
-                  width={20}
-                  height={20}
-                />
-              </li>
-              <li>
-                <Image
-                  src="/assets/facebook.svg"
-                  alt="Logo"
-                  width={20}
-                  height={20}
-                />
-              </li>
-              <li>
-                <Image
-                  src="/assets/instagram.svg"
-                  alt="Logo"
-                  width={20}
-                  height={20}
-                />
-              </li>
-              <li>
-                <Image
-                  src="/assets/linkedin.svg"
-                  alt="Logo"
-                  width={20}
-                  height={20}
-                />
-              </li>
+              {social?.map((item, index) => (
+                <li key={index}>
+                  <a href={item.url.url}>
+                    <Image
+                      src={`/assets/${item.social_type}.svg`}
+                      alt="Logo"
+                      width={20}
+                      height={20}
+                    />
+                  </a>
+                </li>
+              ))}
             </ul>
             <p className="text-center">©{new Date().getUTCFullYear()} - mako</p>
           </Col>
@@ -60,33 +40,15 @@ export default function Footer({ list }): JSX.Element {
             className="d-none d-lg-flex justify-content-center flex-column"
           >
             <Row>
-              <Col lg={4}>
-                <ul className="menu-footer mt-5 ml-3">
-                  <li>Produto</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                </ul>
-              </Col>
-              <Col lg={4}>
-                <ul className="menu-footer mt-5 ml-3">
-                  <li>Produto</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                </ul>
-              </Col>
-              <Col lg={4}>
-                <ul className="menu-footer mt-5 ml-3">
-                  <li>Produto</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                  <li>Lorem Ipsum</li>
-                </ul>
-              </Col>
+              {list?.map((item, index) => (
+                <Col key={index} lg={4}>
+                  <ul className="menu-footer mt-5 ml-3">
+                    {item.list?.map((item, inx) => (
+                      <li key={inx}>{item.text}</li>
+                    ))}
+                  </ul>
+                </Col>
+              ))}
             </Row>
           </Col>
         </Row>

@@ -15,7 +15,7 @@ export default function Header({ title, subTitle }): JSX.Element {
             <h5 className="w-75">{RichText.asText(subTitle)}</h5>
             <Button
               classNames="my-4"
-              link={'/'}
+              link={'/contato'}
               backgroundColor={theme.color.secundary[1]}
               backgroundHoverColor={theme.color.secundary[0]}
               width="168px"

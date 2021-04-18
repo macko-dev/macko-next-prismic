@@ -32,7 +32,7 @@ function CardContainer({ post }): JSX.Element {
 
 export default function Courses({ list }): JSX.Element {
   return (
-    <Container>
+    <Container id="blog">
       <Title>Últimas Postagens</Title>
       <Row>
         {list.map((post) => (

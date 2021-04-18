@@ -15,43 +15,34 @@ const NavBar: React.FC = () => {
         expand="md"
       >
         <Container>
-          <Navbar.Brand href="#home">
-            <Link href="/">
-              <Image
-                src="/assets/logo-dark.svg"
-                alt="Picture of the author"
-                width={250}
-                height={77.73}
-                className="logo"
-              />
-            </Link>
+          <Navbar.Brand href="/">
+            <Image
+              src="/assets/logo-dark.svg"
+              alt="Picture of the author"
+              width={250}
+              height={77.73}
+              className="logo"
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse className="mt-3 flex-grow-0" id="basic-navbar-nav">
             <Nav className="d-flex align-items-center font-weight-bold menu-mobile">
-              <Link href="/">
-                <Nav.Link className="pr-4" href="#como-funciona">
-                  Blog
-                </Nav.Link>
-              </Link>
-              <Link href="/">
-                <Nav.Link className="pr-4" href="#preços">
-                  Preços
-                </Nav.Link>
-              </Link>
-              <Link href="/">
-                <Nav.Link className="pr-5" href="#cursos">
-                  Cursos
-                </Nav.Link>
-              </Link>
+              <Nav.Link className="pr-4" href="#blog">
+                Blog
+              </Nav.Link>
+              <Nav.Link className="pr-4" href="#preços">
+                Preços
+              </Nav.Link>
+
+              <Nav.Link className="pr-5" href="#cursos">
+                Cursos
+              </Nav.Link>
               <hr className="pr-4 line" />
-              <Link href="/">
-                <Nav.Link className="pr-5" href="#sobre">
-                  Sobre
-                </Nav.Link>
-              </Link>
+              <Nav.Link className="pr-5" href="/sobre">
+                Sobre
+              </Nav.Link>
               <Button
-                link={'/'}
+                link={'/vagas'}
                 backgroundColor={theme.color.secundary[1]}
                 backgroundHoverColor={theme.color.secundary[0]}
                 width="125px"

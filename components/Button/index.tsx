@@ -15,6 +15,7 @@ interface ButtonProps {
   height?: string;
   variant?: ButtonVariant;
   size?: 'sm' | 'lg';
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -28,10 +29,11 @@ const Button: React.FC<ButtonProps> = ({
   height,
   variant,
   size,
+  type,
 }) => {
   if (link) {
     return (
-      <Link href="/">
+      <Link href={link}>
         <StyledButton
           className={classNames}
           variant={variant}
@@ -48,7 +50,21 @@ const Button: React.FC<ButtonProps> = ({
       </Link>
     );
   }
-  return <StyledButton type="button">{children}</StyledButton>;
+  return (
+    <StyledButton
+      className={classNames}
+      variant={variant}
+      width={width}
+      height={height}
+      size={size}
+      backgroundColor={backgroundColor}
+      backgroundHoverColor={backgroundHoverColor}
+      color={color}
+      type={type || 'button'}
+    >
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;

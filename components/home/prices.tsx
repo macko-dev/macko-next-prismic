@@ -5,9 +5,41 @@ import Button from '../../components/Button';
 import theme from '../../styles/theme';
 import Link from 'next/link';
 
+function CardPrice({ price, index }): JSX.Element {
+  return (
+    <Card>
+      <img src={`/assets/image-${index + 1}.png`} alt="Check" />
+      <Card.Box>
+        <span className="text-center">
+          <p className="mb-2">{price.level}</p>
+          <h3 className="mb-4">R${price.price}</h3>
+        </span>
+        <ul>
+          {price.benefits_list?.map((item, index) => (
+            <li key={index}>
+              <img src="/assets/check.svg" alt="Check" />
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </Card.Box>
+      <Button
+        link={'/'}
+        backgroundColor={theme.color.primary[2]}
+        backgroundHoverColor={theme.color.primary[3]}
+        size="sm"
+        variant="normal"
+        color={theme.color.white}
+      >
+        Saiba Mais
+      </Button>
+    </Card>
+  );
+}
+
 export default function Prices({ list }): JSX.Element {
   return (
-    <Container className="pb-5">
+    <Container id="preços" className="pb-5">
       <Title>Treinamento e Desenvolvimento</Title>
       <Subtitle>
         Disponibilizamos diversas formas para que você ou seus colaboradores
@@ -15,111 +47,11 @@ export default function Prices({ list }): JSX.Element {
       </Subtitle>
       <hr className="pr-4 vertical-line mx-auto" />
       <Row className="d-flex align-content-stretch flex-wrap justify-content-center">
-        <Col lg={4} className="mb-5">
-          <Card>
-            <img src="/assets/image-1.png" alt="Check" />
-            <Card.Box>
-              <span className="text-center">
-                <p className="mb-2">Inciante</p>
-                <h3 className="mb-4">R$50</h3>
-              </span>
-              <ul>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-              </ul>
-            </Card.Box>
-            <Button
-              link={'/'}
-              backgroundColor={theme.color.primary[2]}
-              backgroundHoverColor={theme.color.primary[3]}
-              size="sm"
-              variant="normal"
-              color={theme.color.white}
-            >
-              Saiba Mais
-            </Button>
-          </Card>
-        </Col>
-        <Col lg={4} className="mb-5">
-          <Card>
-            <img src="/assets/image-2.png" alt="Check" />
-            <Card.Box>
-              <span className="text-center">
-                <p className="mb-2">Regular</p>
-                <h3 className="mb-4">R$70</h3>
-              </span>
-              <ul>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-              </ul>
-              <Button
-                link={'/'}
-                backgroundColor={theme.color.primary[2]}
-                backgroundHoverColor={theme.color.primary[3]}
-                size="sm"
-                variant="normal"
-                color={theme.color.white}
-              >
-                Saiba Mais
-              </Button>
-            </Card.Box>
-          </Card>
-        </Col>
-        <Col lg={4} className="mb-5">
-          <Card>
-            <img src="/assets/image-3.png" alt="Check" />
-            <Card.Box>
-              <span className="text-center">
-                <p className="mb-2">Profissional</p>
-                <h3 className="mb-4">R$100</h3>
-              </span>
-              <ul>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-                <li>
-                  <img src="/assets/check.svg" alt="Check" />
-                  <p>Lorem Ipsum</p>
-                </li>
-              </ul>
-              <Button
-                link={'/'}
-                backgroundColor={theme.color.primary[2]}
-                backgroundHoverColor={theme.color.primary[3]}
-                size="sm"
-                variant="normal"
-                color={theme.color.white}
-              >
-                Saiba Mais
-              </Button>
-            </Card.Box>
-          </Card>
-        </Col>
+        {list.map((price, index) => (
+          <Col key={index} lg={4} className="mb-5">
+            <CardPrice index={index} price={price} />
+          </Col>
+        ))}
       </Row>
     </Container>
   );
