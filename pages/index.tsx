@@ -23,9 +23,9 @@ export default function Home({ home, courses, posts, jobs }): JSX.Element {
   return (
     <>
       <Head>
-        <title>Mako</title>
-        <meta name="og:title" property="og:title" content="Mako" />
-        <meta name="description" content="Mako" />
+        <title>Macko</title>
+        <meta name="og:title" property="og:title" content="Macko" />
+        <meta name="description" content="Macko" />
       </Head>
       <Header title={title_header} subTitle={sub_title_header} />
       <Courses list={courses.results} />

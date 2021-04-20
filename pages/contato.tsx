@@ -20,9 +20,9 @@ function ContactForm({ home }) {
   return (
     <>
       <Head>
-        <title>Contato | Mako</title>
-        <meta name="og:title" property="og:title" content="Mako" />
-        <meta name="description" content="Mako" />
+        <title>Contato | Macko</title>
+        <meta name="og:title" property="og:title" content="Macko" />
+        <meta name="description" content="Macko" />
       </Head>
       <ContactContainer>
         <Container className="bg-light border-radius-15">

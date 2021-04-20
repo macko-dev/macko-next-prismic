@@ -19,8 +19,8 @@ const NavBar: React.FC = () => {
             <Image
               src="/assets/logo-dark.svg"
               alt="Picture of the author"
-              width={250}
-              height={77.73}
+              width={300}
+              height={78}
               className="logo"
             />
           </Navbar.Brand>

@@ -14,12 +14,15 @@ function JobCard({ job }): JSX.Element {
         <h3 className="pb-3">{RichText.asText(job.data.page_title)}</h3>
         <p>{RichText.asText(job.data.description)}</p>
         <ul>
-          {job.data.required?.map((item, index) => (
-            <li key={index}>
-              <img src="/assets/check.svg" alt="Check" />
-              <p>{item.text}</p>
-            </li>
-          ))}
+          {job.data.required?.slice(0, 4).map(
+            (item, index) =>
+              item.type === 'list-item' && (
+                <li key={index}>
+                  <img src="/assets/check.svg" alt="Check" />
+                  <p>{item.text}</p>
+                </li>
+              )
+          )}
         </ul>
         <Button
           link={job.data.cta_link.url}
@@ -33,7 +36,7 @@ function JobCard({ job }): JSX.Element {
           Candidatar
         </Button>
         <Button
-          link={'/'}
+          link={'/vagas'}
           backgroundColor={theme.color.primary[4]}
           backgroundHoverColor={theme.color.primary[4]}
           size="sm"

@@ -24,7 +24,7 @@ function CardPrice({ price, index }): JSX.Element {
         </ul>
       </Card.Box>
       <Button
-        link={'/'}
+        link={'/contato'}
         backgroundColor={theme.color.primary[2]}
         backgroundHoverColor={theme.color.primary[3]}
         size="sm"
