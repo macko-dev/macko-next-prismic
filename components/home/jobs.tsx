@@ -9,12 +9,12 @@ import { RichText } from 'prismic-reactjs';
 function JobCard({ job }): JSX.Element {
   return (
     <Card>
-      <img src={job.data.cover.url} alt="Item" />
+      <img src={job.cover.url} alt="Item" />
       <Card.Box>
-        <h3 className="pb-3">{RichText.asText(job.data.page_title)}</h3>
-        <p>{RichText.asText(job.data.description)}</p>
+        <h3 className="pb-3">{RichText.asText(job.page_title)}</h3>
+        <p>{RichText.asText(job.description)}</p>
         <ul>
-          {job.data.required?.slice(0, 4).map(
+          {job.required?.slice(0, 4).map(
             (item, index) =>
               item.type === 'list-item' && (
                 <li key={index}>
@@ -25,7 +25,7 @@ function JobCard({ job }): JSX.Element {
           )}
         </ul>
         <Button
-          link={job.data.cta_link.url}
+          link={job.cta_link?.url}
           backgroundColor={theme.color.primary[2]}
           backgroundHoverColor={theme.color.primary[3]}
           size="sm"
@@ -61,8 +61,8 @@ export default function Jobs({ list }): JSX.Element {
       <hr className="pr-4 vertical-line mx-auto" />
       <Row className="d-flex align-content-stretch flex-wrap  justify-content-center">
         {list.map((job) => (
-          <Col key={job.uid} lg={5}>
-            <JobCard job={job} />
+          <Col key={job.node._meta.uid} lg={5}>
+            <JobCard job={job.node} />
           </Col>
         ))}
         <Button

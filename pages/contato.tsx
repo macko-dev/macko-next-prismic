@@ -7,6 +7,7 @@ import { Container, Col, Row, Form, Alert } from 'react-bootstrap';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 
+import { GetStaticProps } from 'next';
 import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-reactjs';
 import { client } from '../utils/prismic-configuration';
@@ -80,7 +81,7 @@ function ContactForm({ home }) {
 
 export default ContactForm;
 
-export async function getServerSideProps() {
+export async function getStaticProps(): Promise<GetStaticProps> {
   const home = await client.getSingle('home_page', {});
 
   return { props: { home } };

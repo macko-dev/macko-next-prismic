@@ -7,6 +7,7 @@ import { Container, Col, Row, Form, Alert } from 'react-bootstrap';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 
+import { GetStaticProps } from 'next';
 import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-reactjs';
 import { client } from '../utils/prismic-configuration';
@@ -43,7 +44,7 @@ function ContactForm({ home, about }) {
 
 export default ContactForm;
 
-export async function getServerSideProps() {
+export async function getStaticProps(): Promise<GetStaticProps> {
   const home = await client.getSingle('home_page', {});
   const about = await client.getSingle('about_page', {});
 

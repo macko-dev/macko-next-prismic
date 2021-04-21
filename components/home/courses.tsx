@@ -22,9 +22,9 @@ function CardList({ course, index }): JSX.Element {
           width={168}
           height={168}
         />
-        <h3>{RichText.asText(course.data.page_title)}</h3>
+        <h3>{RichText.asText(course.page_title)}</h3>
         <p>
-          <span>{RichText.asText(course.data.description)}</span>
+          <span>{RichText.asText(course.description)}</span>
         </p>
       </Card>
     </Link>
@@ -39,8 +39,12 @@ export default function Courses({ list }): JSX.Element {
         <Title>Cursos Disponibilizados</Title>
         <Row className="justify-content-center">
           {list.map((course, index) => (
-            <Col key={course.uid} className="pt-5 text-center" lg={4}>
-              <CardList index={index} course={course} />
+            <Col
+              key={course.node._meta.uid}
+              className="pt-5 text-center"
+              lg={4}
+            >
+              <CardList index={index} course={course.node} />
             </Col>
           ))}
           <Button

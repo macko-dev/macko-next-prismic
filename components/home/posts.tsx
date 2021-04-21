@@ -11,12 +11,12 @@ function CardContainer({ post }): JSX.Element {
     <Card>
       <img src="/assets/Item.svg" alt="Espada" className="d-none d-md-block" />
       <div className="description">
-        <h3>{RichText.asText(post.data.title)}</h3>
+        <h3>{RichText.asText(post.title)}</h3>
         <p className="mb-1">
-          <span>{post.data.description}</span>
+          <span>{post.description}</span>
         </p>
         <Button
-          link={'/'}
+          link={'/blog/' + post._meta.uid}
           backgroundColor={theme.color.primary[4]}
           backgroundHoverColor={theme.color.primary[4]}
           size="sm"
@@ -36,8 +36,8 @@ export default function Courses({ list }): JSX.Element {
       <Title>Últimas Postagens</Title>
       <Row>
         {list.map((post) => (
-          <Col key={post.uid} lg={7}>
-            <CardContainer post={post} />
+          <Col key={post.node._meta.uid} lg={7}>
+            <CardContainer post={post.node} />
           </Col>
         ))}
       </Row>

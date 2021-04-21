@@ -48,7 +48,11 @@ export default class MyDocument extends Document {
           <link rel="canonical" href="/" />
           <meta property="og:image" content="/logo.ico" />
           <meta property="og:type" content="website" />
-
+          <script
+            async
+            defer
+            src="https://static.cdn.prismic.io/prismic.js?new=true&repo=mako"
+          ></script>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"

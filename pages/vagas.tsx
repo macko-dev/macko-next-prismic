@@ -7,6 +7,7 @@ import { Container, Col, Row, Accordion, Card } from 'react-bootstrap';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 
+import { GetStaticProps } from 'next';
 import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-reactjs';
 import { client } from '../utils/prismic-configuration';
@@ -44,7 +45,7 @@ function ContactForm({ home, jobs }) {
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={index + 1}>
                       <Card.Body className="pd-5">
-                        <p>{RichText.asText(job.data.description)}</p>
+                        {RichText.render(job.data.job_text)}
                         <ul>{RichText.render(job.data.required)}</ul>
                         <Button
                           link={job.data.cta_link.url}
@@ -74,7 +75,7 @@ function ContactForm({ home, jobs }) {
 
 export default ContactForm;
 
-export async function getServerSideProps() {
+export async function getStaticProps(): Promise<GetStaticProps> {
   const home = await client.getSingle('home_page', {});
   const jobs = await client.query(
     Prismic.Predicates.at('document.type', 'jobs_post'),
