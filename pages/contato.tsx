@@ -10,11 +10,12 @@ import theme from '../styles/theme';
 import { GetStaticProps } from 'next';
 import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-reactjs';
-import { client } from '../utils/prismic-configuration';
 import ApiSearchResponse from 'prismic-javascript/types/ApiSearchResponse';
 
+import { getHomePage } from '../lib/api';
+
 function ContactForm({ home }) {
-  const { footer_list, links } = home.data;
+  const { footer_list, links } = home;
 
   const [state, handleSubmit] = useForm('xayanjed');
 
@@ -81,8 +82,8 @@ function ContactForm({ home }) {
 
 export default ContactForm;
 
-export async function getStaticProps(): Promise<GetStaticProps> {
-  const home = await client.getSingle('home_page', {});
+export async function getStaticProps({ params, preview = false, previewData }) {
+  const home = await getHomePage(previewData);
 
   return { props: { home } };
 }

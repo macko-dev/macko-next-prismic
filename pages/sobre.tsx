@@ -10,11 +10,11 @@ import theme from '../styles/theme';
 import { GetStaticProps } from 'next';
 import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-reactjs';
-import { client } from '../utils/prismic-configuration';
 import ApiSearchResponse from 'prismic-javascript/types/ApiSearchResponse';
+import { getHomePage, getAboutPage } from '../lib/api';
 
 function ContactForm({ home, about }) {
-  const { footer_list, links } = home.data;
+  const { footer_list, links } = home;
 
   const [state, handleSubmit] = useForm('xayanjed');
 
@@ -30,9 +30,9 @@ function ContactForm({ home, about }) {
           <Row>
             <Col className="p-5 text-dark">
               <h2 className="font-weight-bold">
-                {RichText.asText(about.data.page_title)}
+                {RichText.asText(about.page_title)}
               </h2>
-              <p className="pt-2">{RichText.asText(about.data.text_about)}</p>
+              <p className="pt-2">{RichText.asText(about.text_about)}</p>
             </Col>
           </Row>
         </Container>
@@ -44,9 +44,9 @@ function ContactForm({ home, about }) {
 
 export default ContactForm;
 
-export async function getStaticProps(): Promise<GetStaticProps> {
-  const home = await client.getSingle('home_page', {});
-  const about = await client.getSingle('about_page', {});
+export async function getStaticProps({ params, preview = false, previewData }) {
+  const home = await getHomePage(previewData);
+  const about = await getAboutPage(previewData);
 
   return { props: { home, about } };
 }

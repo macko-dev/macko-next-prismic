@@ -10,12 +10,12 @@ import theme from '../styles/theme';
 import { GetStaticProps } from 'next';
 import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-reactjs';
-import { client } from '../utils/prismic-configuration';
 import ApiSearchResponse from 'prismic-javascript/types/ApiSearchResponse';
 
-function ContactForm({ home, jobs }) {
-  const { footer_list, links } = home.data;
-  const { results } = jobs;
+import { getHomePage, getAllJobsForHome } from '../lib/api';
+
+function ContactForm({ home, allJobs }) {
+  const { footer_list, links } = home;
 
   const [state, handleSubmit] = useForm('xayanjed');
 
@@ -31,24 +31,24 @@ function ContactForm({ home, jobs }) {
           <Row>
             <Col className="p-5 text-dark" md="8">
               <h3 className="font-weight-bold mb-5">
-                {results?.length} vagas abertas
+                {allJobs?.length} vagas abertas
               </h3>
               <Accordion defaultActiveKey="0">
-                {results.map((job, index) => (
-                  <Card key={job.id}>
+                {allJobs.map((job, index) => (
+                  <Card key={job.node._meta.uid}>
                     <Accordion.Toggle
                       as={Card.Header}
                       className="cursor-pointer text-uppercase"
                       eventKey={index + 1}
                     >
-                      {RichText.asText(job.data.page_title)}
+                      {RichText.asText(job.node.page_title)}
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={index + 1}>
                       <Card.Body className="pd-5">
-                        {RichText.render(job.data.job_text)}
-                        <ul>{RichText.render(job.data.required)}</ul>
+                        {RichText.render(job.node.job_text)}
+                        <ul>{RichText.render(job.node.required)}</ul>
                         <Button
-                          link={job.data.cta_link.url}
+                          link={job.node.cta_link?.url}
                           backgroundColor={theme.color.primary[2]}
                           backgroundHoverColor={theme.color.primary[3]}
                           size="sm"
@@ -75,12 +75,9 @@ function ContactForm({ home, jobs }) {
 
 export default ContactForm;
 
-export async function getStaticProps(): Promise<GetStaticProps> {
-  const home = await client.getSingle('home_page', {});
-  const jobs = await client.query(
-    Prismic.Predicates.at('document.type', 'jobs_post'),
-    { orderings: '[my.jobs.date desc]' }
-  );
+export async function getStaticProps({ preview = false, previewData }) {
+  const home = await getHomePage(previewData);
+  const allJobs = await getAllJobsForHome(previewData);
 
-  return { props: { home, jobs } };
+  return { props: { home, allJobs } };
 }

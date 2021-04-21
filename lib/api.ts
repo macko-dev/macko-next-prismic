@@ -11,7 +11,10 @@ export const PrismicClient = Prismic.client(REF_API_URL, {
   accessToken: API_TOKEN,
 });
 
-async function fetchAPI(query, { previewData, variables } = {}) {
+async function fetchAPI(
+  query,
+  { previewData = undefined, variables = undefined } = {}
+) {
   const prismicAPI = await PrismicClient.getApi();
   const res = await fetch(
     `${GRAPHQL_API_URL}?query=${query}&variables=${JSON.stringify(variables)}`,
@@ -209,6 +212,27 @@ export async function getHomePage(previewData) {
   );
 
   return data.allHome_pages.edges[0].node;
+}
+
+export async function getAboutPage(previewData) {
+  const data = await fetchAPI(
+    `
+    {
+      allAbout_pages {
+        edges {
+          node {
+            page_title
+            text_about
+            _linkType
+          }
+        }
+      }
+    }
+  `,
+    { previewData }
+  );
+
+  return data.allAbout_pages.edges[0].node;
 }
 
 export async function getPostAndMorePosts(slug, previewData) {

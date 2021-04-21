@@ -9,7 +9,6 @@ import Footer from '../components/home/footer';
 import { GetStaticProps } from 'next';
 import Prismic from 'prismic-javascript';
 import { RichText } from 'prismic-reactjs';
-import { client } from '../utils/prismic-configuration';
 import ApiSearchResponse from 'prismic-javascript/types/ApiSearchResponse';
 import {
   getAllPostsForHome,
